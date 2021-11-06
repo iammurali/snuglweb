@@ -15,8 +15,11 @@ yarn dev
 
 TODO:
 1. Web template
-
-create top nav
-
 create a side bar to hold components with styles
 it should expand to show different types available for a give component type or have a header
+
+2. drag and drop components feature using the template array
+
+3. Save Template
+
+4. Export template
