@@ -22,4 +22,12 @@ it should expand to show different types available for a give component type or 
 
 3. Save Template
 
-4. Export template
+4. Export template as html
+
+
+
+Features to be done:
+* Show list of components for each section 
+* Drag and drop or select and insert component in the array
+* edit image and store temporarily to export web page
+* show code preview
