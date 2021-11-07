@@ -2,7 +2,7 @@ import create from 'zustand'
 
 let templateArray = [
     
-  ];
+];
 const templateStore = create(set => ({
   templateArray: templateArray,
   setTemplate: (templateArr) => set(state => ({ templateArray: templateArr })),
