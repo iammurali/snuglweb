@@ -1,12 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import modalStore from "../global-stores/modalStore";
+import templateStore from "../global-stores/templateStore";
 import TemplateProvider from "./templates";
 
 function ComponentModal() {
   const isOpen = modalStore((state) => state.isOpen);
   const componentCat = modalStore((state) => state.componentCategory);
   const closeModal = modalStore((state) => state.closeModal);
+  const addComponent = templateStore((state)=> state.addComponent);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -54,7 +56,7 @@ function ComponentModal() {
               <div className="mt-2 ">
                 {componentCat && Object.keys(TemplateProvider()[componentCat]).map((key) => {
                   return (
-                    <div className="hover:bg-gray-400">
+                    <div onClick={() => addComponent({f: componentCat, c: key})} className="hover:bg-gray-400">
                       {TemplateProvider()[componentCat][key]}
                     </div>
                   );
