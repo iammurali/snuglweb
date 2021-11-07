@@ -1,9 +1,10 @@
 import create from 'zustand'
 
 const modalStore = create(set => ({
-  isOpen: true,
-  openModal: () => set(state => ({ isOpen: true })),
-  closeModal: () => set(state => ({ isOpen: false })),
+  isOpen: false,
+  componentCategory: '',
+  openModal: (compCat) => set(state => ({ isOpen: true,  componentCategory: compCat})),
+  closeModal: () => set(state => ({ isOpen: false, componentCategory: '' })),
 }))
 
 

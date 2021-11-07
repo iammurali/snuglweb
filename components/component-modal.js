@@ -5,6 +5,7 @@ import TemplateProvider from "./templates";
 
 function ComponentModal() {
   const isOpen = modalStore((state) => state.isOpen);
+  const componentCat = modalStore((state) => state.componentCategory);
   const closeModal = modalStore((state) => state.closeModal);
 
   return (
@@ -48,13 +49,13 @@ function ComponentModal() {
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                Header Styles
+                {componentCat} Styles
               </Dialog.Title>
               <div className="mt-2 ">
-                {Object.keys(TemplateProvider()["TopNav"]).map((key) => {
+                {componentCat && Object.keys(TemplateProvider()[componentCat]).map((key) => {
                   return (
                     <div className="hover:bg-gray-400">
-                      {TemplateProvider()["TopNav"][key]}
+                      {TemplateProvider()[componentCat][key]}
                     </div>
                   );
                 })}

@@ -18,9 +18,6 @@ function SideBar(props) {
     link.click();
   }
 
-  
-
-
   const openModal = modalStore(state => state.openModal);
   
 
@@ -47,23 +44,31 @@ function SideBar(props) {
 
         <nav>
           <a
-            href="#"
-            onClick={openModal('TopNav')}
+         
+            onClick={() =>{ openModal('TopNav')}}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Headers
           </a>
           <a
-            onClick={openModal}
+            onClick={() =>  {openModal('Hero')}}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Heroes
           </a>
           <a
-            href=""
+            onClick={() =>  {openModal('Testimonial')}}
+          
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
-            Footers
+            Testimonials
+          </a>
+          <a
+            onClick={() =>  {openModal('Team')}}
+           
+            className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
+          >
+            Teams
           </a>
           <a
             href=""
@@ -80,7 +85,7 @@ function SideBar(props) {
         </nav>
       </div>
       
-        <ComponentModal />
+      <ComponentModal />
 
     </>
   );
