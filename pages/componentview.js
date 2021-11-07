@@ -88,7 +88,7 @@ function CompViewPage(props) {
                   {(provided, snapshot) => (
                     <div >
                       <div
-                      className="hover:bg-blue-400" 
+                      className="hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50" 
                         ref={provided.innerRef}
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}

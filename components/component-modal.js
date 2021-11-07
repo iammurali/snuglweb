@@ -9,6 +9,11 @@ function ComponentModal() {
   const componentCat = modalStore((state) => state.componentCategory);
   const closeModal = modalStore((state) => state.closeModal);
   const addComponent = templateStore((state)=> state.addComponent);
+  
+  const addComp = (obj)=> {
+    addComponent(obj);
+    closeModal()
+  }
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -56,7 +61,7 @@ function ComponentModal() {
               <div className="mt-2 ">
                 {componentCat && Object.keys(TemplateProvider()[componentCat]).map((key) => {
                   return (
-                    <div onClick={() => addComponent({f: componentCat, c: key})} key={key} className="hover:bg-gray-400">
+                    <div onClick={() => addComp({f: componentCat, c: key})} key={key} className="hover:bg-gray-400">
                       {TemplateProvider()[componentCat][key]}
                     </div>
                   );
