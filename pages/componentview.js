@@ -2,36 +2,16 @@ import TemplateProvider from "../components/templates";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useEffect, useState } from "react";
 import { resetServerContext } from "react-beautiful-dnd"
+import templateStore from "../global-stores/templateStore";
 
 resetServerContext()
 
 function CompViewPage(props) {
- let templateArray = [
-    {
-      f: "TopNav",
-      c: "TopNav",
-    },
-    {
-      f: "Hero",
-      c: "Hero",
-    },
-    {
-      f: "Team",
-      c: "Team",
-    },
-    {
-      f: "Testimonial",
-      c: "Testimonial",
-    },
-    {
-      f: "Testimonial",
-      c: "Testimonial2",
-    },
-  ];
+ 
   const grid = 8;
+  const templateArray = templateStore(state => state.templateArray);
+  const setTemplateArray = templateStore(state => state.setTemplate)
 
-
-  const [templateArrayState, setTemplateArrayState] = useState(templateArray)
   const [winReady, setwinReady] = useState(false);
     useEffect(() => {
         setwinReady(true);
@@ -45,12 +25,12 @@ function CompViewPage(props) {
     }
     
     const items = reorder(
-      templateArrayState, 
+      templateArray,
       result.source.index, 
       result.destination.index
     );
-    console.log('ITEMS::::::::::', items);
-    setTemplateArrayState(items)
+
+    setTemplateArray(items)
     
   }
 
@@ -99,7 +79,7 @@ function CompViewPage(props) {
               style={getListStyle(snapshot.isDraggingOver)}
               {...provided.droppableProps}
             >
-              {templateArrayState.length > 0 && templateArrayState.map((item, index) => (
+              {templateArray.length > 0 && templateArray.map((item, index) => (
                 <Draggable
                   key={item.c}
                   draggableId={item.c}

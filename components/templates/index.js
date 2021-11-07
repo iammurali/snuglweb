@@ -1,8 +1,9 @@
-import TopNav from "../topnav";
+
 import Hero from "./Hero/Hero";
 import Team from "./Team/Team";
 import Testimonial2 from "./Testimonials/testimonial2";
 import Testimonial from "./Testimonials/testimonials";
+import TopNav from "./TopNav/TopNav";
 
 export default function TemplateProvider(props) {
     const theme = {

@@ -1,9 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import Spacer from "./spacer";
 import TemplateProvider from "./templates";
 
 function SideBar(props) {
+  
+
+  let [isOpen, setIsOpen] = useState(true);
+  let [componentType, setComponentType] = useState('TopNav');
+
   function downloadInnerHtml(filename, elId, mimeType) {
     var elHtml = document.getElementById(elId).innerHTML;
     var link = document.createElement("a");
@@ -17,13 +21,11 @@ function SideBar(props) {
     link.click();
   }
 
-  let [isOpen, setIsOpen] = useState(true);
-
   function closeModal() {
     setIsOpen(false);
   }
 
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true);
   }
 
@@ -51,12 +53,13 @@ function SideBar(props) {
         <nav>
           <a
             href="#"
+            onClick={openModal}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Headers
           </a>
           <a
-            href=""
+            onClick={openModal}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Heroes
@@ -97,7 +100,7 @@ function SideBar(props) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-black opacity-40" />
+              <Dialog.Overlay className="fixed inset-0 bg-gray-900 opacity-50" />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
@@ -125,14 +128,13 @@ function SideBar(props) {
                 </Dialog.Title>
                 <div className="mt-2">
                   {Array.from({ length: 8 }, (_, i) => (
-                    <>
-                      {TemplateProvider()["TopNav"]["TopNav"]}
-                      <Spacer />
-                    </>
+                    <div key={i} className="p-4">
+                      {TemplateProvider()[componentType][componentType]}
+                    </div>
                   ))}
                 </div>
 
-                <div className="mt-4 flex">
+                {/* <div className="mt-4 flex">
                   <button
                     type="button"
                     className="px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
@@ -140,7 +142,7 @@ function SideBar(props) {
                   >
                     Got it, thanks!
                   </button>
-                </div>
+                </div> */}
               </div>
             </Transition.Child>
           </div>

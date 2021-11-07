@@ -1,8 +1,9 @@
 import Head from "next/head";
-import TopNav from "../components/topnav";
 import SideBar from "../components/sidebar";
 import CompViewPage from "./componentview";
+import { useState } from "react";
 export default function Home() {
+
   return (
     <div className="flex">
       <Head>
