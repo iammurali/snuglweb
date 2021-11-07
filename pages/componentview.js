@@ -71,6 +71,11 @@ function CompViewPage(props) {
     background: isDraggingOver ? 'lightblue' : '',
     padding: grid,
   });
+
+  const downloadHtml = () => {
+    // let snuglService = new SnuglUtilityService();
+    // snuglService.generateHtmlForArray(templateArrayState);
+  }
         
 
 
@@ -84,7 +89,7 @@ function CompViewPage(props) {
 
  
   return (
-    <div className="p-2">
+    <div className="p-2" onClick={downloadHtml}>
      {winReady && (<DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
@@ -129,11 +134,3 @@ function CompViewPage(props) {
   );
 }
 export default CompViewPage;
-
-
-
-
-
-// {templateArray.map((obj, i) => {
-//             return TemplateProvider()[obj.f][obj.c];
-//           })}

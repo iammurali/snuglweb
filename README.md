@@ -31,3 +31,11 @@ Features to be done:
 * Drag and drop or select and insert component in the array
 * edit image and store temporarily to export web page
 * show code preview
+
+
+
+Issues:
+1. export without draggable
+    write a function that grabs the array's current value and return JSX;
+    which will be passed to the existing function
+
