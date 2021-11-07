@@ -2,7 +2,6 @@ import Head from "next/head";
 import SideBar from "../components/sidebar";
 import CompViewPage from "./componentview";
 export default function Home() {
-
   return (
     <div className="flex">
       <Head>
@@ -14,7 +13,7 @@ export default function Home() {
         <SideBar />
       </aside>
 
-      <main className="overflow-auto" id="main">
+      <main className="overflow-auto" id="main" style={{ width: "100%" }}>
         <CompViewPage />
       </main>
     </div>
