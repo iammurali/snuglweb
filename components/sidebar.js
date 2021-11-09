@@ -6,14 +6,29 @@ import ComponentModal from "./component-modal";
 function SideBar(props) {
 
   function downloadInnerHtml(filename, elId, mimeType) {
-    var elHtml = document.getElementById(elId).innerHTML;
-    var link = document.createElement("a");
+    let headTag = document.createElement("head");
+    let htmlTag = document.createElement("html").appendChild(headTag);
+    let body = document.createElement("body");
+    let elHtml = document.getElementById(elId);
+    body.appendChild(elHtml);
+    
+    let linkT = document.createElement('link');
+    linkT.type = 'text/css';
+    linkT.rel = 'stylesheet';
+    headTag.appendChild(linkT);
+
+    linkT.href = 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css';
+
+
+
+    htmlTag.append(body);
+    let link = document.createElement("a");
     mimeType = mimeType || "text/plain";
 
     link.setAttribute("download", filename);
     link.setAttribute(
       "href",
-      "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(elHtml)
+      "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(htmlTag.innerHTML)
     );
     link.click();
   }
@@ -23,7 +38,7 @@ function SideBar(props) {
 
   return (
     <>
-      <div className=" text-blue-100 space-y-6 py-7 px-2 inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+      <div className=" text-blue-100 space-y-6 px-2">
         <a href="#" className="text-white flex items-center space-x-2 px-4">
           <svg
             className="w-8 h-8"
@@ -77,7 +92,7 @@ function SideBar(props) {
             Gallery
           </a>
           <div
-            onClick={() => downloadInnerHtml("index.html", "main", "text/html")}
+            onClick={() => downloadInnerHtml("index.html", "webframe", "text/html")}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Export

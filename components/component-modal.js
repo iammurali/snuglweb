@@ -61,7 +61,7 @@ function ComponentModal() {
               <div className="mt-2 ">
                 {componentCat && Object.keys(TemplateProvider()[componentCat]).map((key) => {
                   return (
-                    <div onClick={() => addComp({f: componentCat, c: key})} key={key} className="hover:bg-gray-400">
+                    <div  onClick={() => addComp({f: componentCat, c: key})} key={key} className="hover:bg-gray-400">
                       {TemplateProvider()[componentCat][key]}
                     </div>
                   );

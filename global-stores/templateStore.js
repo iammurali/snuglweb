@@ -6,7 +6,8 @@ let templateArray = [
 const templateStore = create(set => ({
   templateArray: templateArray,
   setTemplate: (templateArr) => set(state => ({ templateArray: templateArr })),
-  addComponent: (componentObj) => set(state => ({templateArray: [...state.templateArray, componentObj]}))
+  addComponent: (componentObj) => set(state => ({templateArray: [...state.templateArray, componentObj]})),
+  clearAll: ()=>set(state => ({templateArray: []})),
 }))
 
 // logger disable during production build
