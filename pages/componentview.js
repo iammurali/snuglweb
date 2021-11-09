@@ -105,7 +105,7 @@ function CompViewPage(props) {
                             </div>
                             <button
                               onClick={() => deleteCompo(index)}
-                              class="hidden top-0 right-0 absolute group-hover:block "
+                              className="hidden top-0 right-0 absolute group-hover:block "
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
