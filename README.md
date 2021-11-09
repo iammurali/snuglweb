@@ -39,3 +39,8 @@ Issues:
     write a function that grabs the array's current value and return JSX;
     which will be passed to the existing function
 
+
+
+Create a folder with images and index html file 
+use the following link
+https://stackoverflow.com/questions/8608724/how-to-zip-files-using-javascript
