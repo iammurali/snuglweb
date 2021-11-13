@@ -1,11 +1,12 @@
-import create from 'zustand'
+import create from "zustand";
 
-const modalStore = create(set => ({
+const componentModalStore = create((set) => ({
   isOpen: false,
-  componentCategory: '',
-  openModal: (compCat) => set(state => ({ isOpen: true,  componentCategory: compCat})),
-  closeModal: () => set(state => ({ isOpen: false, componentCategory: '' })),
-}))
+  componentCategory: "",
+  openModal: (compCat) =>
+    set((state) => ({ isOpen: true, componentCategory: compCat })),
+  closeModal: () => set((state) => ({ isOpen: false, componentCategory: "" })),
+}));
 
+export default componentModalStore;
 
-export default modalStore;

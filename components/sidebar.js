@@ -1,25 +1,21 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
 import modalStore from "../global-stores/modalStore";
 import ComponentModal from "./component-modal";
 
 function SideBar(props) {
-
   function downloadInnerHtml(filename, elId, mimeType) {
     let headTag = document.createElement("head");
     let htmlTag = document.createElement("html").appendChild(headTag);
     let body = document.createElement("body");
     let elHtml = document.getElementById(elId);
     body.appendChild(elHtml);
-    
-    let linkT = document.createElement('link');
-    linkT.type = 'text/css';
-    linkT.rel = 'stylesheet';
+
+    let linkT = document.createElement("link");
+    linkT.type = "text/css";
+    linkT.rel = "stylesheet";
     headTag.appendChild(linkT);
 
-    linkT.href = 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css';
-
-
+    linkT.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css";
 
     htmlTag.append(body);
     let link = document.createElement("a");
@@ -28,13 +24,15 @@ function SideBar(props) {
     link.setAttribute("download", filename);
     link.setAttribute(
       "href",
-      "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(htmlTag.innerHTML)
+      "data:" +
+        mimeType +
+        ";charset=utf-8," +
+        encodeURIComponent(htmlTag.innerHTML)
     );
     link.click();
   }
 
-  const openModal = modalStore(state => state.openModal);
-  
+  const openModal = modalStore((state) => state.openModal);
 
   return (
     <>
@@ -59,28 +57,33 @@ function SideBar(props) {
 
         <nav>
           <a
-         
-            onClick={() =>{ openModal('TopNav')}}
+            onClick={() => {
+              openModal("TopNav");
+            }}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Headers
           </a>
           <a
-            onClick={() =>  {openModal('Hero')}}
+            onClick={() => {
+              openModal("Hero");
+            }}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Heroes
           </a>
           <a
-            onClick={() =>  {openModal('Testimonial')}}
-          
+            onClick={() => {
+              openModal("Testimonial");
+            }}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Testimonials
           </a>
           <a
-            onClick={() =>  {openModal('Team')}}
-           
+            onClick={() => {
+              openModal("Team");
+            }}
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Teams
@@ -92,16 +95,17 @@ function SideBar(props) {
             Gallery
           </a>
           <div
-            onClick={() => downloadInnerHtml("index.html", "webframe", "text/html")}
+            onClick={() =>
+              downloadInnerHtml("index.html", "webframe", "text/html")
+            }
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white"
           >
             Export
           </div>
         </nav>
       </div>
-      
-      <ComponentModal />
 
+      <ComponentModal />
     </>
   );
 }

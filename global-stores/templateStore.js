@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 let templateArray = [
-    
+	{f:'TopNav',c:'TopNav'}    
 ];
 const templateStore = create(set => ({
   templateArray: templateArray,

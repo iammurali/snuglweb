@@ -1,19 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import componentModalStore from "../global-stores/modalStore";
-import templateStore from "../global-stores/templateStore";
-import TemplateProvider from "./templates";
+import { Fragment, useState } from "react";
+import inputModalStore from "../global-stores/inputModalStore";
 
-function ComponentModal() {
-  const isOpen = componentModalStore((state) => state.isOpen);
-  const componentCat = componentModalStore((state) => state.componentCategory);
-  const closeModal = componentModalStore((state) => state.closeModal);
-  const addComponent = templateStore((state) => state.addComponent);
-
-  const addComp = (obj) => {
-    addComponent(obj);
-    closeModal();
-  };
+function InputModal() {
+  const isOpen = inputModalStore((state) => state.isInputModalOpen);
+  const closeModal = inputModalStore((state) => state.closeModal);
+  console.log(isOpen);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -56,24 +48,13 @@ function ComponentModal() {
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
               >
-                {componentCat} Styles
+                Styles
               </Dialog.Title>
               <div className="mt-2 ">
-                {componentCat &&
-                  Object.keys(TemplateProvider()[componentCat]).map((key) => {
-                    return (
-                      <div
-                        onClick={() => addComp({ f: componentCat, c: key })}
-                        key={key}
-                        className="hover:bg-gray-400"
-                      >
-                        {TemplateProvider()[componentCat][key]}
-                      </div>
-                    );
-                  })}
+                I am Input Modal, i will show inputs available for a particular
+                component u have selected
               </div>
-
-              {/* <div className="mt-4 flex">
+              <div className="mt-4 flex">
                 <button
                   type="button"
                   className="px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
@@ -81,7 +62,7 @@ function ComponentModal() {
                 >
                   Got it, thanks!
                 </button>
-              </div> */}
+              </div>
             </div>
           </Transition.Child>
         </div>
@@ -90,4 +71,4 @@ function ComponentModal() {
   );
 }
 
-export default ComponentModal;
+export default InputModal;
