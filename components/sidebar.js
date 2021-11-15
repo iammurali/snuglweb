@@ -6,7 +6,8 @@ function SideBar(props) {
     let headTag = document.createElement("head");
     let htmlTag = document.createElement("html").appendChild(headTag);
     let body = document.createElement("body");
-    let elHtml = document.getElementById(elId);
+    let elHtmlOg = document.getElementById(elId);
+    let elHtml = elHtmlOg.cloneNode(true);
     body.appendChild(elHtml);
 
     let linkT = document.createElement("link");

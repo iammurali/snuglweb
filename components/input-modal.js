@@ -5,8 +5,20 @@ import inputModalStore from "../global-stores/inputModalStore";
 function InputModal() {
   const isOpen = inputModalStore((state) => state.isInputModalOpen);
   const closeModal = inputModalStore((state) => state.closeModal);
-  console.log(isOpen);
+  const eventTarget = inputModalStore((state) => state.eventtarget);
+  const [innerText, setInnerText] = useState("");
 
+  const submitChange = (e) => {
+    e.preventDefault();
+    if (innerText != "") {
+      eventTarget.innerText = innerText;
+    }
+    closeModal();
+  };
+
+  const onTypeSetValue = (e) => {
+    setInnerText(e.target.value);
+  };
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -46,23 +58,26 @@ function InputModal() {
             <div className="inline-block w-3/4 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
               <Dialog.Title
                 as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
+                className="text-lg font-medium text-gray-900 leading-6"
               >
-                Styles
+                Edit Element
               </Dialog.Title>
-              <div className="mt-2 ">
-                I am Input Modal, i will show inputs available for a particular
-                component u have selected
-              </div>
-              <div className="mt-4 flex">
+              <form onSubmit={submitChange} className="w-full py-5 m-auto">
+                <div className="text-gray-600">
+                  <input
+                    className="w-full px-2 py-2 border-green-300 rounded focus: ring"
+                    placeholder="Enter Value"
+                    onChange={(e) => onTypeSetValue(e)}
+                  />
+                </div>
+
                 <button
-                  type="button"
-                  className="px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                  onClick={closeModal}
+                  type="submit"
+                  className="px-4 py-2 mt-5 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                 >
-                  Got it, thanks!
+                  Save
                 </button>
-              </div>
+              </form>
             </div>
           </Transition.Child>
         </div>
