@@ -16,28 +16,23 @@ yarn dev
 TODO:
 1. Web template
 create a side bar to hold components with styles
-it should expand to show different types available for a give component type or have a header
+it should expand to show different types available for a give component type or have a header - done
 
-2. drag and drop components feature using the template array
+2. drag and drop components feature using the template array - to be changed
 
-3. Save Template
+3. Save Template - done
 
-4. Export template as html
+4. Export template as html - done
+5. Show list of components for each section
+6. Drag and drop or select and insert component in the array
 
 
 
 Features to be done:
-* Show list of components for each section 
-* Drag and drop or select and insert component in the array
 * edit image and store temporarily to export web page
 * show code preview
+* allow users to upload component
 
-
-
-Issues:
-1. export without draggable
-    write a function that grabs the array's current value and return JSX;
-    which will be passed to the existing function
 
 
 
