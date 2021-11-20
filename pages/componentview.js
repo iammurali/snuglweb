@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import Frame from 'react-frame-component'
+import Frame from "react-frame-component";
 
 import templateStore from "../global-stores/templateStore";
 import Welcome from "../components/welcome";
 import inputModalStore from "../global-stores/inputModalStore";
 import InputModal from "../components/input-modal";
 import TemplateProvider from "../components/templates";
-
 
 function CompViewPage(props) {
   const DEFAULT_POSTION = { top: 0, left: 0, width: 0, height: 0 };
@@ -39,9 +38,10 @@ function CompViewPage(props) {
     setTemplateArray(items);
   };
 
-  const deleteCompo = (index) => {
+  const deleteCompo = () => {
     let temArr = [...templateArray];
-    temArr.splice(index, 1);
+    console.table(temArr);
+    temArr.splice(componentIndex, 1);
     setTemplateArray(temArr);
   };
 
@@ -62,8 +62,8 @@ function CompViewPage(props) {
 
   const onElementHover = (event, index) => {
     setComponentIndex(index);
+    console.log(index)
     let postionOfHoveredElement = event.target.getBoundingClientRect();
-
     if (event.target.id.includes("editable")) {
       console.log(event.target.offsetTop, event.target.offsetLeft);
       setBorderPostion({
@@ -84,7 +84,7 @@ function CompViewPage(props) {
 
   const onElementMouseLeave = (event) => {
     setComponentIndex(-1);
-    setShowBorder(false)
+    setShowBorder(false);
   };
 
   const onMouseLeaveParent = () => {
@@ -114,60 +114,66 @@ function CompViewPage(props) {
   return (
     <div className="p-2">
       {winReady && templateArray.length > 0 ? (
-          <div id="webframe" className="relative">
-            {templateArray.map((item, index) => (
+        <div id="webframe" className="relative">
+          {templateArray.map((item, index) => (
+            <div
+              id={`parent-${item.c}-${index}`}
+              key={`${item.c}-${index}`}
+              className="relative "
+            >
               <div
-                id={`parent-${item.c}-${index}`}
-                key={`${item.c}-${index}`}
-                className="relative "
+                id="secondchild"
+                onMouseDown={openInputModal}
+                onMouseEnter={(event) =>
+                  onMouseEnterParent(event, `parent-${item.c}-${index}`)
+                }
+                onMouseOver={(event) => onElementHover(event, index)}
+                onMouseLeave={(event) => onElementMouseLeave(event)}
+                className=""
               >
-                <div
-                  id="secondchild"
-                  onMouseDown={openInputModal}
-                  onMouseEnter={(event) =>
-                    onMouseEnterParent(event, `parent-${item.c}-${index}`)
-                  }
-                  onMouseOver={(event) => onElementHover(event, index)}
-                  onMouseLeave={(event) => onElementMouseLeave(event)}
-                  className=""
-                >
-                  {TemplateProvider(item)[item.f][item.c]}
-                </div>
+                {TemplateProvider(item)[item.f][item.c]}
               </div>
-            ))}
-            <div
+            </div>
+          ))}
+          <div
+            style={{
+              top: borderPostion.top - 5,
+              left: borderPostion.left - 5,
+              width: borderPostion.width + 10,
+              height: borderPostion.height + 10,
+
+              position: "absolute",
+              border: "2px dashed #5dce91",
+              pointerEvents: "none",
+              display: borderPostion.left != 0 ? "block" : "none",
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              width: componentPosition.width,
+              top: componentPosition.top,
+              height: componentPosition.height,
+              left: componentPosition.left,
+              borderColor: "blue",
+              display: showBorder ? "block" : "none",
+            }}
+            className="w-full border-2 pointer-events-none"
+          >
+            <div 
               style={{
-                top: borderPostion.top - 5,
-                left: borderPostion.left - 5,
-                width: borderPostion.width + 10,
-                height: borderPostion.height + 10,
-           
-                position: "absolute",
-                border: "2px dashed #5dce91",
-                pointerEvents: "none",
-                display: borderPostion.left != 0 ? "block" : "none",
-              }}
-            ></div>
-            <div
-              style={{
-                position: "absolute",
-                width: componentPosition.width,
-                top: componentPosition.top,
-                height: componentPosition.height,
-                left: componentPosition.left,
-                borderColor: "blue",
-                display: showBorder ? "block" : "none",
-                pointerEvents: "none",
-              }}
-              className="w-full border-2"
+                  pointerEvents: "auto",
+                }} 
+                onMouseOver={()=>{setShowBorder(true)}}
             >
               <button
-                onClick={() => deleteCompo(index)}
-                className="absolute top-0 right-0 group-hover:block pointer-events-auto"
+                onClick={() => deleteCompo()}
+                
+                className="relative top-0 right-0"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
+                  className="w-6 h-6 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="red"
@@ -181,13 +187,13 @@ function CompViewPage(props) {
                 </svg>
               </button>
             </div>
-
           </div>
+        </div>
       ) : (
         <Welcome />
       )}
       <div className="hidden">
-        <div >
+        <div>
           {templateArray &&
             templateArray.map((item, index) => (
               <div key={`${item.c}-${index}`}>

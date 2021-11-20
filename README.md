@@ -32,6 +32,8 @@ Features to be done:
 * edit image and store temporarily to export web page
 * show code preview
 * allow users to upload component
+* allow all text to be editable
+
 
 
 
