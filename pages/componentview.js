@@ -40,9 +40,16 @@ function CompViewPage(props) {
 
   const deleteCompo = () => {
     let temArr = [...templateArray];
+
+    console.log("Here");
     console.table(temArr);
-    temArr.splice(componentIndex, 1);
-    setTemplateArray(temArr);
+    console.log(componentIndex);
+    if (componentIndex > -1) {
+      temArr.splice(componentIndex, 1);
+      setTemplateArray(temArr);
+    } else {
+      alert("COmponent index not set ");
+    }
   };
 
   const reorder = (list, startIndex, endIndex) => {
@@ -62,10 +69,8 @@ function CompViewPage(props) {
 
   const onElementHover = (event, index) => {
     setComponentIndex(index);
-    console.log(index)
     let postionOfHoveredElement = event.target.getBoundingClientRect();
     if (event.target.id.includes("editable")) {
-      console.log(event.target.offsetTop, event.target.offsetLeft);
       setBorderPostion({
         top: event.target.offsetTop,
         left: event.target.offsetLeft,
@@ -76,6 +81,8 @@ function CompViewPage(props) {
     } else {
       resetElementState();
     }
+
+    console.log("component index", componentIndex, index);
   };
 
   const resetElementState = () => {
@@ -83,7 +90,6 @@ function CompViewPage(props) {
   };
 
   const onElementMouseLeave = (event) => {
-    setComponentIndex(-1);
     setShowBorder(false);
   };
 
@@ -92,7 +98,6 @@ function CompViewPage(props) {
   };
 
   const onMouseEnterParent = (e, id) => {
-    console.log("MOUSE ENTERED ::::", e.target);
     setShowBorder(true);
     let target = document.getElementById(id);
     let postionOfHoveredElement = target.getBoundingClientRect();
@@ -104,7 +109,6 @@ function CompViewPage(props) {
       width: postionOfHoveredElement.width,
       height: postionOfHoveredElement.height,
     };
-    console.log(postion);
 
     setComponentPosition(postion);
   };
@@ -160,15 +164,16 @@ function CompViewPage(props) {
             }}
             className="w-full border-2 pointer-events-none"
           >
-            <div 
+            <div
               style={{
-                  pointerEvents: "auto",
-                }} 
-                onMouseOver={()=>{setShowBorder(true)}}
+                pointerEvents: "auto",
+              }}
+              onMouseOver={() => {
+                setShowBorder(true);
+              }}
             >
               <button
                 onClick={() => deleteCompo()}
-                
                 className="relative top-0 right-0"
               >
                 <svg
