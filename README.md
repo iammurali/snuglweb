@@ -3,8 +3,8 @@ A DRAG AND DROP STATIC SITE EDITOR FOR THE MASSES
 
 
 ```bash
-npm run dev
-# or
+yarn install 
+
 yarn dev
 ```
 
